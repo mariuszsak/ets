@@ -1,0 +1,8 @@
+{
+  "name": "ets",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mariuszsak/ets.git",
+  "author": "mariuszsak <mariuszsak@gmail.com>",
+  "license": "MIT"
+}
