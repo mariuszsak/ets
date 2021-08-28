@@ -1,11 +1,11 @@
 <template>
-  <h3>{{ val }}</h3>
+  <h3>Liczba użytkowników: {{ val }}</h3>
 </template>
 
 <script>
 
 export default {
-  name: 'FetchData',
+  name: 'FetchUserData',
   data () {
     return {
       val: null

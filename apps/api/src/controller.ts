@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const router = express.Router();
 
 
-router.get('/countall', async (req: express.Request, res) => {
+router.get('/users', async (req: express.Request, res) => {
         try {
             const users = await prisma.user.count(
                 {
@@ -26,6 +26,29 @@ router.get('/countall', async (req: express.Request, res) => {
         }
     }
 );
+
+router.get('/issues', async (req: express.Request, res) => {
+        try {
+            const issues = await prisma.ticket.count(
+                {
+                    where: {
+                        status: 'REGISTERED'
+                    }
+                }
+            );
+            res
+                .status(200)
+                .send(JSON.stringify(issues))
+                .end();
+        } catch (err) {
+            res
+                .status(400)
+                .send(JSON.stringify(err))
+                .end();
+        }
+    }
+);
+
 
 router.post('/issue/addissue', async (req: express.Request, res) => {
         const {registeredAt, authorId, solvedAt} = req.body.data;
