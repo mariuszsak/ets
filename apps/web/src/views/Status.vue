@@ -1,16 +1,18 @@
 <template>
   <div>
     <h1>Status page</h1>
-    <FetchData/>
+    <FetchUserData/>
+    <FetchIssueData/>
   </div>
 </template>
 
 <script>
-import FetchData from '../components/FetchData'
+import FetchUserData from '../components/FetchUserData'
+import FetchIssueData from '../components/FetchIssueData'
 
 export default {
   name: 'Status',
-  components: { FetchData }
+  components: { FetchUserData, FetchIssueData }
 }
 </script>
 
