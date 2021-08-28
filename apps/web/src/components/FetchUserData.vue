@@ -12,7 +12,7 @@ export default {
     }
   },
   mounted () {
-    fetch('http://localhost:3000/countall')
+    fetch('http://localhost:3000/users')
       .then(res => res.json())
       .then(data => {
         this.val = data
