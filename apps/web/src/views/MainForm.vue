@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h1>MainForm page</h1>
     <MainForm/>
-  </div>
 </template>
 
 <script>

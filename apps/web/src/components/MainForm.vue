@@ -1,4 +1,6 @@
 <template>
+  <Navbar />
+  <h1>MainForm page</h1>
   <form>
     <label>Name:</label>
     <input type="text" required v-model="formVal.name">
@@ -11,8 +13,10 @@
 </template>
 
 <script>
+import Navbar from './Navbar'
 export default {
   name: 'MainForm',
+  components: { Navbar },
   data () {
     return {
       formVal: {
