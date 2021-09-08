@@ -24,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/mainform',
     name: 'MainForm',
     component: () => import(/* webpackChunkName: "about" */ '../views/MainForm.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   }
 ]
 

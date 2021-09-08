@@ -4,6 +4,7 @@
     <router-link to="/about">About</router-link> |
     <router-link to="/status">Status</router-link> |
     <router-link to="/mainform">MainForm</router-link>
+    <router-link to="/login">Login</router-link>
   </div>
   <router-view/>
 </template>
