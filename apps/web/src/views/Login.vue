@@ -1,9 +1,9 @@
 <template>
-  <h1> Login to Your Account </h1>
+  <h1> Zaloguj się: </h1>
   <p><input type='text' placeholder='Email' v-model='email'/></p>
   <p><input type='password' placeholder='Hasło' v-model='password'/></p>
   <p>
-    <button @click='Login'> Submit</button>
+    <button @click='Login'> Wyślij </button>
   </p>
 </template>
 
