@@ -1,12 +1,12 @@
 <template>
   <Navbar />
-  <h1>MainForm page</h1>
+  <h1>Zgłoszenie problemu informatycznego:</h1>
   <form>
-    <label>Name:</label>
+    <label>Nazwisko osoby zgłaszającej:</label>
     <input type="text" required v-model="formVal.name">
-    <label>Room:</label>
+    <label>Sala/pokój/gabinet nr:</label>
     <input type="text" required v-model="formVal.room">
-    <label>Issue:</label>
+    <label>Opis problemu:</label>
     <textarea required v-model="formVal.issue"/>
     <button type="submit" @click="submitForm">Wyślij</button>
   </form>
@@ -47,5 +47,9 @@ export default {
 </script>
 
 <style scoped>
-
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 </style>
