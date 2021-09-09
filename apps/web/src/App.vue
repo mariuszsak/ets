@@ -17,7 +17,7 @@ export default {
         if (!user) {
           router.replace('/login')
         } else if (route.path === '/login') {
-          router.replace('/')
+          router.replace('/mainform')
         }
       })
     })
