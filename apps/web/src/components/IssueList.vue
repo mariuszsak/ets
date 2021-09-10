@@ -22,7 +22,7 @@ export default {
     }
   },
   mounted () {
-    fetch('http://localhost:3000/issue/list')
+    fetch('http://localhost:3000/tickets')
       .then(res => res.json())
       .then(data => {
         this.val = data

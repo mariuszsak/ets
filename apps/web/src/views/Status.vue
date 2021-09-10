@@ -3,20 +3,20 @@
     <Navbar />
     <h1>Status page</h1>
     <FetchUserData/>
-    <FetchIssueData/>
+    <FetchTickets/>
     <IssueList />
   </div>
 </template>
 
 <script>
 import FetchUserData from '../components/FetchUserData'
-import FetchIssueData from '../components/FetchIssueData'
 import IssueList from '../components/IssueList'
 import Navbar from '../components/Navbar'
+import FetchTickets from '../components/FetchTickets'
 
 export default {
   name: 'Status',
-  components: { Navbar, FetchUserData, FetchIssueData, IssueList }
+  components: { FetchTickets, Navbar, FetchUserData, IssueList }
 }
 </script>
 

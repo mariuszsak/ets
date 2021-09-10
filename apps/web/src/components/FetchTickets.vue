@@ -5,17 +5,17 @@
 <script>
 
 export default {
-  name: 'FetchUserData',
+  name: 'FetchTickets',
   data () {
     return {
       val: null
     }
   },
   mounted () {
-    fetch('http://localhost:3000/issues')
+    fetch('http://localhost:3000/tickets')
       .then(res => res.json())
       .then(data => {
-        this.val = data
+        this.val = data.length
       })
   }
 }
