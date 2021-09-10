@@ -5,28 +5,6 @@ const prisma = new PrismaClient();
 const router = express.Router();
 
 
-router.get('/users', async (req: express.Request, res) => {
-        try {
-            const users = await prisma.user.count(
-                {
-                    where: {
-                        role: 'USER'
-                    }
-                }
-            );
-            res
-                .status(200)
-                .send(JSON.stringify(users))
-                .end();
-        } catch (err) {
-            res
-                .status(400)
-                .send(JSON.stringify(err))
-                .end();
-        }
-    }
-);
-
 router.get('/tickets', async (req: express.Request, res) => {
         try {
             const issues = await prisma.ticket.findMany();
