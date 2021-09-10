@@ -27,15 +27,9 @@ router.get('/users', async (req: express.Request, res) => {
     }
 );
 
-router.get('/issues', async (req: express.Request, res) => {
+router.get('/tickets', async (req: express.Request, res) => {
         try {
-            const issues = await prisma.ticket.count(
-                {
-                    where: {
-                        status: 'REGISTERED'
-                    }
-                }
-            );
+            const issues = await prisma.ticket.findMany();
             res
                 .status(200)
                 .send(JSON.stringify(issues))
@@ -50,7 +44,7 @@ router.get('/issues', async (req: express.Request, res) => {
 );
 
 
-router.get('/issue/list', async (req: express.Request, res) => {
+router.get('/tickets/current', async (req: express.Request, res) => {
         try {
             const tick = await prisma.ticket.findMany({
                 where: {
@@ -59,7 +53,7 @@ router.get('/issue/list', async (req: express.Request, res) => {
                             status: 'REGISTERED'
                         },
                         {
-                            status: 'INPROGRESS'
+                            status: 'PENDING'
                         }
                     ]
                 }
@@ -77,16 +71,15 @@ router.get('/issue/list', async (req: express.Request, res) => {
     }
 );
 
-router.post('/issue/addissue', async (req: express.Request, res) => {
-        const {registeredAt, authorId, solvedAt, issue} = req.body.data;
+router.post('/tickets', async (req: express.Request, res) => {
+        const { userId, initialIssue} = req.body.data;
         console.log(req.body);
         try {
             const tick = await prisma.ticket.create({
                 data: {
-                    registeredAt: new Date(registeredAt),
-                    authorId: authorId,
-                    solvedAt: new Date(solvedAt),
-                    issue: issue
+                    registeredAt: new Date(),
+                    userId: userId,
+                    initialIssue: initialIssue
                 }
             });
             res
