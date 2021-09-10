@@ -5,7 +5,6 @@ datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-
 }
 
 generator client {
@@ -13,22 +12,32 @@ generator client {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
+  id      Int       @id @default(autoincrement())
+  email   String    @unique
   name    String?
-  role    Role     @default(USER)
-  tickets Ticket[]
+  role    Role      @default(USER)
+  Ticket  Ticket[]
+  Comment Comment[]
 }
 
 model Ticket {
   id           Int       @id @default(autoincrement())
   registeredAt DateTime  @default(now())
-  authorId     Int
-  author       User      @relation(fields: [authorId], references: [id])
+  userId       Int
+  user         User      @relation(fields: [userId], references: [id])
   solvedAt     DateTime?
-  issue        String?
-  comments     String?
   status       Status    @default(REGISTERED)
+  Comment      Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  tickedId  Int
+  ticket    Ticket   @relation(fields: [tickedId], references: [id])
+  text      String
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
@@ -39,6 +48,6 @@ enum Role {
 
 enum Status {
   REGISTERED
-  INPROGRESS
+  PENDING
   SOLVED
 }
