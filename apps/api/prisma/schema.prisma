@@ -26,6 +26,7 @@ model Ticket {
   userId       Int
   user         User      @relation(fields: [userId], references: [id])
   solvedAt     DateTime?
+  initialIssue String
   status       Status    @default(REGISTERED)
   Comment      Comment[]
 }
