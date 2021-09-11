@@ -19,15 +19,18 @@ export const useUser = () => {
       return await fetch('http://localhost:3000/users', {
         body: JSON.stringify(data)
       })
-        .then(res => res.json())
+        .then(res => {
+          res.json()
+          isLoggedIn.value = true
+        })
     } catch (err) {
       console.error(err);
       throw new Error(err.response?.data?.message);
     }
+  }
 
-    return {
-      ...toRefs(state),
-      login
-    }
+  return {
+    ...toRefs(state),
+    login
   }
 }
