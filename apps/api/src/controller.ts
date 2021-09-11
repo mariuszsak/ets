@@ -9,7 +9,7 @@ router.get('/users', async (req: express.Request, res: express.Response) => {
         console.log(req.body.data)
 
         try {
-            const user = await prisma.user.findUnique({
+            const user = await prisma.user.findFirst({
                 where: {
                     email: email
                 }
