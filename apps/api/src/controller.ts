@@ -4,8 +4,30 @@ import express from 'express';
 const prisma = new PrismaClient();
 const router = express.Router();
 
+router.get('/users', async (req: express.Request, res: express.Response) => {
+        const {email} = req.body.data;
+        console.log(req.body.data)
 
-router.get('/tickets', async (req: express.Request, res) => {
+        try {
+            const user = await prisma.user.findUnique({
+                where: {
+                    email: email
+                }
+            });
+            res
+                .status(200)
+                .send(JSON.stringify(user.role))
+                .end();
+        } catch (err) {
+            res
+                .status(400)
+                .send(JSON.stringify(err))
+                .end();
+        }
+    }
+);
+
+router.get('/tickets', async (req: express.Request, res: express.Response) => {
         try {
             const issues = await prisma.ticket.findMany();
             res
@@ -22,7 +44,7 @@ router.get('/tickets', async (req: express.Request, res) => {
 );
 
 
-router.get('/tickets/current', async (req: express.Request, res) => {
+router.get('/tickets/current', async (req: express.Request, res: express.Response) => {
         try {
             const tick = await prisma.ticket.findMany({
                 where: {
@@ -49,9 +71,10 @@ router.get('/tickets/current', async (req: express.Request, res) => {
     }
 );
 
-router.post('/tickets', async (req: express.Request, res) => {
-        const { userId, initialIssue} = req.body.data;
+router.post('/tickets', async (req: express.Request, res: express.Response) => {
+        const {userId, initialIssue} = req.body.data;
         console.log(req.body);
+
         try {
             const tick = await prisma.ticket.create({
                 data: {
