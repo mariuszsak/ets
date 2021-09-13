@@ -1,5 +1,7 @@
 import {toRefs, reactive, ref} from "vue";
 
+type Role = "USER" | "MANAGER" | "ADMIN";
+
 type LoginData = {
   email: string;
   password: string;
@@ -11,7 +13,7 @@ export const useUser = () => {
 
   const state = reactive({
     email: '',
-    role: '',
+    role: '' as Role,
   });
 
   const login = async (data: LoginData) => {
