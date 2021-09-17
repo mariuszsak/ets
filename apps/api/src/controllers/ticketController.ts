@@ -1,75 +1,8 @@
 import {PrismaClient} from "@prisma/client";
 import express from 'express';
-import jwt from 'jsonwebtoken';
-
 
 const prisma = new PrismaClient();
 const router = express.Router();
-
-const authMiddleware = (req, res, next) => {
-    const token = req.headers['authorization']?.split(' ')[1]
-    if (!token) {
-        return res.status(401).send('unauthorized');
-    }
-
-    jwt.verify(token, process.env.ACCESS_TOKEN, (error, data) => {
-        if (error) {
-            res.status(403).send('Forbidden')
-        }
-        req.user = data;
-        next();
-    })
-}
-
-router.get('/users', async (req: express.Request, res: express.Response) => {
-        const {email} = req.body.data;
-        console.log(req.body.data)
-
-        try {
-            const user = await prisma.user.findFirst({
-                where: {
-                    email: email
-                }
-            });
-            res
-                .status(200)
-                .send(JSON.stringify(user.role))
-                .end();
-        } catch (err) {
-            res
-                .status(400)
-                .send(JSON.stringify(err))
-                .end();
-        }
-    }
-);
-
-router.post('/login', async (req: express.Request, res: express.Response) => {
-        const {email} = req.body.data;
-        try {
-            const user = await prisma.user.findFirst({
-                where: {
-                    email: email
-                }
-            });
-            if (!user) {
-                return res
-                    .status(401)
-                    .send('Unauthorized');
-            }
-
-            const payload = user;
-            const token = jwt.sign(payload, process.env.ACCESS_TOKEN)
-
-            res.json({token});
-        } catch (err) {
-            res
-                .status(400)
-                .send(JSON.stringify(err))
-                .end();
-        }
-    }
-);
 
 router.get('/tickets', async (req: express.Request, res: express.Response) => {
         try {

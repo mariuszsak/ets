@@ -1,8 +1,10 @@
 import {PrismaClient} from '@prisma/client';
 import express from 'express';
 import cors from 'cors';
-import controller from './controller';
 import dotenv from 'dotenv';
+import userController from "./controllers/userController";
+import loginController from "./controllers/loginController";
+import ticketController from "./controllers/ticketController";
 
 export const prisma = new PrismaClient();
 export const app = express();
@@ -14,4 +16,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.use('/', controller);
+app.use('/', userController);
+app.use('/', loginController);
+app.use('/', ticketController);
